@@ -10,4 +10,15 @@ class DashboardController extends Controller
   {
     return view('dashboard.home');
   }
+
+  public function administratif()
+  {
+    return view('dashboard.administratif');
+  }
+
+  public function enveloppe()
+  {
+    return view('dashboard.enveloppe');
+  }
+
 }

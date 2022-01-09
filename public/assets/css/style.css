@@ -1600,7 +1600,6 @@ body{background-color:#eee;}
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
     line-height: 40px;
 }
 
@@ -1610,26 +1609,13 @@ body{background-color:#eee;}
     color: #999999;
 }
 
+
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
     background: rgba(255,255,255,0.2);
 }
 
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
 
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
@@ -1677,4 +1663,12 @@ body{background-color:#eee;}
   margin-top: -70px;
 }
 
+.active{
+  background: rgba(255,255,255,0.2);
+  color:white !important;
+}
 
+.form-check-input:checked {
+    background-color: #20B360 !important;
+    border-color: #20B360 !important;
+}

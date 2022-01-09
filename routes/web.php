@@ -28,4 +28,6 @@ Route::post('/prospect-create', 'ProspectController@create')->name('prospect-cre
 // Administrateur
 Route::group(['middleware' => ['auth', 'admin']], function () {
   Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+  Route::get('/administratif', 'DashboardController@administratif')->name('administratif');
+  Route::get('/enveloppe', 'DashboardController@enveloppe')->name('enveloppe');
 });
