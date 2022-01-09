@@ -128,7 +128,7 @@
                     <option value="Centre ville">Centre ville</option>
                   </select>
                 </div>
-                <div class="col-sm mb-3">
+                {{-- <div class="col-sm mb-3">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="type_projet" id="type_projet1" value="Extension">
                     <label class="form-check-label" for="type_projet1">
@@ -141,7 +141,7 @@
                       Construction
                     </label>
                   </div>
-                </div>
+                </div> --}}
 
               </div>
           </div>
