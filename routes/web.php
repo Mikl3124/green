@@ -30,4 +30,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
   Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
   Route::get('/administratif', 'DashboardController@administratif')->name('administratif');
   Route::get('/enveloppe', 'DashboardController@enveloppe')->name('enveloppe');
+  //Projet
+  Route::post('/projet-create', 'ProjetController@create')->name('projet.create');
 });
