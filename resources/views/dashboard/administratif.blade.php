@@ -128,27 +128,13 @@
                     <option value="Centre ville">Centre ville</option>
                   </select>
                 </div>
-                {{-- <div class="col-sm mb-3">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="type_projet" id="type_projet1" value="Extension">
-                    <label class="form-check-label" for="type_projet1">
-                      Extension
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="type_projet" id="type_projet2" value="Construction" checked>
-                    <label class="form-check-label" for="type_projet2">
-                      Construction
-                    </label>
-                  </div>
-                </div> --}}
 
               </div>
           </div>
       </div>
     </div>
     <div class="text-center my-3">
-        <button class="btn btn-success" type="submit">Suivant</button>
+        <button class="btn btn-success" type="submit">Suivant <i class="fas fa-arrow-right"></i></button>
     </div>
     </form>
 

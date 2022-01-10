@@ -1672,3 +1672,11 @@ body{background-color:#eee;}
     background-color: #20B360 !important;
     border-color: #20B360 !important;
 }
+
+#extensionDiv {
+  display: none;
+}
+
+#constructionDiv {
+  display: none;
+}
