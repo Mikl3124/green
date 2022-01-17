@@ -16,6 +16,15 @@ class CreateProjetTable extends Migration
         Schema::create('projet', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('maitre_ouvrage_id')->index()->references('id')->on('maitre_ouvrage');
+            $table->unsignedBigInteger('maitre_oeuvre_id')->index()->references('id')->on('maitre_oeuvre');
+            $table->string('number');
+            $table->string('name');
+            $table->string('adresse');
+            $table->string('ref_cadastrales');
+            $table->string('date_pc');
+            $table->string('emplacement');
+            
         });
     }
 
