@@ -9,9 +9,9 @@
     <div class="card mb-3">
       <div class="card-body">
         <div class="d-flex justify-content-between">
-          <h3>Surfaces</h3>
+          <h3 class="green"><i class="fas fa-check"></i> Surfaces</h3>
           <a class="btn btn-primary" data-bs-toggle="collapse" href="#surfaces" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Saisir
+            Modifier
           </a>
         </div>
         <div class="collapse mt-3" id="surfaces">
