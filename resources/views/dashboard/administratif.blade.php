@@ -72,58 +72,57 @@
                     @enderror
                   </div>
                   <div class="row">
-                      <div class="col-sm-3 mb-3">
-                        <input type="text" name="cp_construction" class="form-control @error('cp_construction') is-invalid @enderror" value="{{ old('cp_construction') }}" placeholder="Code Postal">
-                        @error('cp_construction')
-                          <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                      <div class="col-sm-9 mb-3">
-                        <input type="text" name="town_construction" class="form-control @error('town_construction') is-invalid @enderror" value="{{ old('town_construction') }}" placeholder="Ville">
-                        @error('town_construction')
-                          <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                  </div>
-                  <div class="col-sm mb-3">
-                      <input type="text" name="ref_cadastrales" class="form-control @error('ref_cadastrales') is-invalid @enderror" value="{{ old('ref_cadastrales') }}" placeholder="Références Cadastrales">
-                      @error('ref_cadastrales')
+                    <div class="col-sm-3 mb-3">
+                      <input type="text" name="cp_construction" class="form-control @error('cp_construction') is-invalid @enderror" value="{{ old('cp_construction') }}" placeholder="Code Postal">
+                      @error('cp_construction')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
+                    <div class="col-sm-9 mb-3">
+                      <input type="text" name="town_construction" class="form-control @error('town_construction') is-invalid @enderror" value="{{ old('town_construction') }}" placeholder="Ville">
+                      @error('town_construction')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="col-sm mb-3">
+                    <input type="text" name="ref_cadastrales" class="form-control @error('ref_cadastrales') is-invalid @enderror" value="{{ old('ref_cadastrales') }}" placeholder="Références Cadastrales">
+                    @error('ref_cadastrales')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                  </div>
               </div>
             </div>
         </div>
       </div>
-
       <div class="row">
         <div class="col-sm mb-2">
             <div class="card">
                 <h5 class="card-header text-center">Adresse du maître d'oeuvre</h5>
                 <div class="card-body">
                     <div class="form-check mb-2 mr-sm-2">
-                        <input type="checkbox" class="form-check-input" name="different_ouvrage" id="check_different_identity" value="0" />
+                        <input type="checkbox" class="form-check-input" name="different_ouvrage"  {{ old('different_ouvrage') == 1 ? 'checked' : '' }} id="check_different_identity" value="1" />
                         <label class="form-check-label mb-3" for="inlineFormCheck">
                             Identitié du maître d'ouvrage différente
                         </label>
                     </div>
                     <div class="row" id="different_identity" style="display:none">
                         <div class="col-sm mb-3">
-                            <input type="text" name="lastname_oeuvre" class="form-control" placeholder="Nom">
+                            <input type="text" name="lastname_oeuvre" class="form-control" value="{{ old('lastname_oeuvre') }}"  placeholder="Nom">
                         </div>
                         <div class="col-sm mb-3">
-                            <input type="text" name="firstname_oeuvre" class="form-control" placeholder="Prénom">
+                            <input type="text" name="firstname_oeuvre" class="form-control" value="{{ old('firstname_oeuvre') }}" placeholder="Prénom">
                         </div>
                     </div>
                     <div class="col-sm mb-3">
-                        <input type="text" name="adresse_co" class="form-control" placeholder="Adresse">
+                        <input type="text" name="adresse_oeuvre" value="{{ old('adresse_oeuvre') }}" class="form-control" placeholder="Adresse">
                     </div>
                     <div class="row">
                         <div class="col-sm-3 mb-3">
-                        <input type="text" name="cp_co" class="form-control" placeholder="Code Postal">
+                        <input type="text" name="cp_oeuvre" class="form-control" value="{{ old('cp_oeuvre') }}" placeholder="Code Postal">
                         </div>
                         <div class="col-sm-9 mb-3">
-                        <input type="text" name="town_co" class="form-control" placeholder="Ville">
+                        <input type="text" name="town_oeuvre" class="form-control" value="{{ old('town_oeuvre') }}" placeholder="Ville">
                         </div>
                     </div>
                     <div class="col-sm mb-3">
@@ -155,11 +154,10 @@
                     <option value="Centre ville">Centre ville</option>
                   </select>
                 </div>
-
               </div>
           </div>
+        </div>
       </div>
-    </div>
     <div class="text-center my-3">
         <button class="btn btn-success" type="submit">Suivant <i class="fas fa-arrow-right"></i></button>
     </div>
@@ -170,6 +168,14 @@
         $('#check_different_identity').change(function() {
             $('#different_identity').toggle();
         });
+
+        $(function() {
+          if ($('#check_different_identity').is(":checked")) {
+              $('#different_identity').show();
+            } else {
+              $('#different_identity').hide();
+            }
+          });
     </script>
 
 
