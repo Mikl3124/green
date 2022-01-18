@@ -6,7 +6,7 @@
         <h2>Données administratives</h2>
         <p>Nom Projet (n°34555)</p>
     </div>
-    <form action="{{ route('projet.create')}}" method="post">
+    <form action="{{ route('administratif.create')}}" method="post">
       @csrf
       <div class="row mb-3">
         <div class="col-sm mb-2">
@@ -15,31 +15,46 @@
                 <div class="card-body">
                   <div class="row" novalidate>
                       <div class="col-sm mb-3">
-                        <input type="text" name="lastname" class="form-control" placeholder="Nom" required>
+                        <input type="text" name="lastname_ouvrage" class="form-control @error('lastname_ouvrage') is-invalid @enderror" value="{{ old('lastname_ouvrage') }}" placeholder="Nom">
+                        @error('lastname_ouvrage')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="col-sm mb-3">
-                        <input type="text" name="firstname" class="form-control" placeholder="Prénom" required>
+                        <input type="text" name="firstname_ouvrage" class="form-control @error('firstname_ouvrage') is-invalid @enderror" value="{{ old('firstname_ouvrage') }}" placeholder="Prénom">
+                        @error('firstname_ouvrage')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                   </div>
                   <div class="col-sm mb-3">
-                      <input type="text" name="adresse" class="form-control" placeholder="Adresse">
-                  </div>
+                      <input type="text" name="adresse_ouvrage" class="form-control @error('adresse_ouvrage') is-invalid @enderror" value="{{ old('adresse_ouvrage') }}" placeholder="Adresse">
+                      @error('adresse_ouvrage')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
                   <div class="row">
                       <div class="col-sm-3 mb-3">
-                        <input type="text" name="cp" class="form-control" placeholder="Code Postal">
+                        <input type="text" name="cp_ouvrage" class="form-control @error('cp_ouvrage') is-invalid @enderror" value="{{ old('cp_ouvrage') }}" placeholder="Code Postal">
+                        @error('cp_ouvrage')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="col-sm-9 mb-3">
-                        <input type="text" name="town" class="form-control" placeholder="Ville">
+                        <input type="text" name="town_ouvrage" class="form-control @error('town_ouvrage') is-invalid @enderror" value="{{ old('town_ouvrage') }}" placeholder="Ville">
+                        @error('town_ouvrage')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                   </div>
                   <div class="col-sm mb-3">
                     <label for="phone">Personne à contacter en cas de manque d'information:</label>
                     <div class="row">
                       <div class="col-sm-6 mb-3">
-                        <input type="text" name="nom_contact" class="form-control" placeholder="Nom">
+                        <input type="text" name="nom_contact" class="form-control" value="{{ old('nom_contact') }}" placeholder="Nom">
                       </div>
                       <div class="col-sm-6 mb-3">
-                          <input type="text" name="phone_contact" class="form-control" placeholder="Téléphone">
+                          <input type="text" name="phone_contact" class="form-control" value="{{ old('phone_contact') }}" placeholder="Téléphone">
                       </div>
                     </div>
                   </div>
@@ -51,19 +66,31 @@
               <h5 class="card-header text-center">Adresse de la construction</h5>
               <div class="card-body">
                   <div class="col-sm mb-3">
-                      <input type="text" name="adresse_co" class="form-control" placeholder="Adresse">
+                    <input type="text" name="adresse_construction" class="form-control @error('adresse_construction') is-invalid @enderror" value="{{ old('adresse_construction') }}" placeholder="Adresse">
+                    @error('adresse_construction')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="row">
                       <div class="col-sm-3 mb-3">
-                      <input type="text" name="cp_co" class="form-control" placeholder="Code Postal">
+                        <input type="text" name="cp_construction" class="form-control @error('cp_construction') is-invalid @enderror" value="{{ old('cp_construction') }}" placeholder="Code Postal">
+                        @error('cp_construction')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="col-sm-9 mb-3">
-                      <input type="text" name="town_co" class="form-control" placeholder="Ville">
+                        <input type="text" name="town_construction" class="form-control @error('town_construction') is-invalid @enderror" value="{{ old('town_construction') }}" placeholder="Ville">
+                        @error('town_construction')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                   </div>
                   <div class="col-sm mb-3">
-                      <input type="text" name="references_cadastrales" class="form-control" placeholder="Références Cadastrales">
-                  </div>
+                      <input type="text" name="ref_cadastrales" class="form-control @error('ref_cadastrales') is-invalid @enderror" value="{{ old('ref_cadastrales') }}" placeholder="Références Cadastrales">
+                      @error('ref_cadastrales')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
               </div>
             </div>
         </div>
@@ -75,17 +102,17 @@
                 <h5 class="card-header text-center">Adresse du maître d'oeuvre</h5>
                 <div class="card-body">
                     <div class="form-check mb-2 mr-sm-2">
-                        <input type="checkbox" class="form-check-input" name="different_mo" id="check_different_identity" value="0" />
+                        <input type="checkbox" class="form-check-input" name="different_ouvrage" id="check_different_identity" value="0" />
                         <label class="form-check-label mb-3" for="inlineFormCheck">
                             Identitié du maître d'ouvrage différente
                         </label>
                     </div>
                     <div class="row" id="different_identity" style="display:none">
                         <div class="col-sm mb-3">
-                            <input type="text" name="lastname_mo" class="form-control" placeholder="Nom">
+                            <input type="text" name="lastname_oeuvre" class="form-control" placeholder="Nom">
                         </div>
                         <div class="col-sm mb-3">
-                            <input type="text" name="firstname_mo" class="form-control" placeholder="Prénom">
+                            <input type="text" name="firstname_oeuvre" class="form-control" placeholder="Prénom">
                         </div>
                     </div>
                     <div class="col-sm mb-3">
