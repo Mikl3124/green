@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MaitreOeuvre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,6 +43,13 @@ class ProjetController extends Controller
   if ($validator->fails()) {
     return back()->withErrors($validator)->withInput();
   }
+
+
+    $maitre_oeuvre = new MaitreOeuvre;
+    $maitre_oeuvre->firstname = $request->lastname_ouvrage;
+
+    dd($maitre_oeuvre);
+
 
     return view('dashboard.enveloppe');
   }
