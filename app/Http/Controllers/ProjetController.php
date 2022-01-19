@@ -21,6 +21,7 @@ class ProjetController extends Controller
       'cp_construction' => 'required|integer',
       'town_construction' => 'required',
       'ref_cadastrales' => 'required',
+      'date_pc'=> 'required'
 
   ],
   [
@@ -35,6 +36,7 @@ class ProjetController extends Controller
       'cp_construction.integer' => 'Le code postal doit être un nombre',
       'town_construction.required' => 'Le nom de la ville est requis',
       'ref_cadastrales.required' => 'Les références cadastrales sont requises',
+      'date_pc.required' => 'La date est requise'
   ]);
 
   if ($validator->fails()) {

@@ -126,12 +126,12 @@
                         </div>
                     </div>
                     <div class="col-sm mb-3">
-                      <label for="type_mo">Type</label>
-                      <select class="form-select" >
-                        <option value="Constructeur">Constructeur</option>
-                        <option value="Maitre d'oeuvre">Maitre d'oeuvre</option>
-                        <option value="Architecte">Architecte</option>
-                        <option value="Auto-constructeur">Auto Constructeur</option>
+                      <label for="type_oeuvre">Type</label>
+                      <select class="form-select" name="type_oeuvre">
+                        <option value="Constructeur" {{ old('type_oeuvre') == "Constructeur" ? 'selected' : '' }}>Constructeur</option>
+                        <option value="Maitre d'oeuvre" {{ old('type_oeuvre') == "Maitre d'oeuvre" ? 'selected' : '' }}>Maitre d'oeuvre</option>
+                        <option value="Architecte" {{ old('type_oeuvre') == "Architecte" ? 'selected' : '' }}>Architecte</option>
+                        <option value="Auto-constructeur" {{ old('type_oeuvre') == "Auto-constructeur" ? 'selected' : '' }}>Auto Constructeur</option>
                       </select>
                     </div>
                 </div>
@@ -143,15 +143,18 @@
               <div class="card-body">
                 <div class="col-sm mb-3">
                   <label for="date_pc">Date du permis de construire (au mois près)</label>
-                  <input type="date" name="date_pc" class="form-control">
+                  <input type="date" name="date_pc" class="form-control @error('date_pc') is-invalid @enderror" value="{{ old('date_pc') }}">
+                  @error('date_pc')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="col-sm mb-3">
                   <label for="emplacement">Emplacement du projet</label>
                   <select name="emplacement" class="form-select" >
-                    <option value="Rase campagne">Rase campagne</option>
-                    <option value="Village">Village</option>
-                    <option value="Zone Pavillonnaire">Zone pavillonnaire</option>
-                    <option value="Centre ville">Centre ville</option>
+                    <option value="Rase campagne" {{ old('emplacement') == "Rase campagne" ? 'selected' : '' }}>Rase campagne</option>
+                    <option value="Village" {{ old('emplacement') == "Village" ? 'selected' : '' }}>Village</option>
+                    <option value="Zone pavillonnaire" {{ old('emplacement') == "Zone pavillonnaire" ? 'selected' : '' }}>Zone pavillonnaire</option>
+                    <option value="Centre ville" {{ old('emplacement') == "Centre ville" ? 'selected' : '' }}>Centre ville</option>
                   </select>
                 </div>
               </div>
