@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMaitreOeuvreTable extends Migration
+class CreateMaitreOuvragesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMaitreOeuvreTable extends Migration
      */
     public function up()
     {
-        Schema::create('maitre_oeuvre', function (Blueprint $table) {
+        Schema::create('maitre_ouvrages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('firstname');
@@ -21,7 +21,8 @@ class CreateMaitreOeuvreTable extends Migration
             $table->string('adresse');
             $table->string('cp');
             $table->string('ville');
-            $table->string('type');
+            $table->string('contact_name');
+            $table->string('contact_phone');
         });
     }
 
@@ -32,6 +33,6 @@ class CreateMaitreOeuvreTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('maitre_oeuvre');
+        Schema::dropIfExists('maitre_ouvrages');
     }
 }

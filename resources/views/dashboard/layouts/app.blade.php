@@ -101,7 +101,7 @@
 
     </script>
     <!-- /#wrapper -->
-
+    @include('flashy::message')
 </body>
 
 </html>

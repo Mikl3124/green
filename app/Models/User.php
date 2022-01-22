@@ -45,4 +45,10 @@ class User extends Authenticatable
      *        false = they have no access to the blog admin panel
      */
 
+    public function projets()
+    {
+        return $this->hasMany(Projet::class);
+
+    }
+
 }

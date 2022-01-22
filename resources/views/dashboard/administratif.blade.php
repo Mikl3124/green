@@ -4,10 +4,11 @@
 
     <div class="section-title-dashboard mb-3 bg-light py-3">
         <h2>Données administratives</h2>
-        <p>Nom Projet (n°34555)</p>
+        <p>{{$projet->name}} (Projet: {{ $projet->number }})</p>
     </div>
-    <form action="{{ route('administratif.create')}}" method="post">
+    <form action="{{ route('administratif.create')}}" method="POST">
       @csrf
+      <input type="hidden" name="projet_id" value={{ $projet->id }}>
       <div class="row mb-3">
         <div class="col-sm mb-2">
             <div class="card">
@@ -15,33 +16,33 @@
                 <div class="card-body">
                   <div class="row" novalidate>
                       <div class="col-sm mb-3">
-                        <input type="text" name="lastname_ouvrage" class="form-control @error('lastname_ouvrage') is-invalid @enderror" value="{{ old('lastname_ouvrage') }}" placeholder="Nom">
+                        <input type="text" name="lastname_ouvrage" class="form-control @error('lastname_ouvrage') is-invalid @enderror" value="{{ old('lastname_ouvrage') ?? $projet->maitre_ouvrage->lastname }}" placeholder="Nom">
                         @error('lastname_ouvrage')
                           <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                       </div>
                       <div class="col-sm mb-3">
-                        <input type="text" name="firstname_ouvrage" class="form-control @error('firstname_ouvrage') is-invalid @enderror" value="{{ old('firstname_ouvrage') }}" placeholder="Prénom">
+                        <input type="text" name="firstname_ouvrage" class="form-control @error('firstname_ouvrage') is-invalid @enderror" value="{{ old('firstname_ouvrage') ?? $projet->maitre_ouvrage->firstname }}" placeholder="Prénom">
                         @error('firstname_ouvrage')
                           <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                       </div>
                   </div>
                   <div class="col-sm mb-3">
-                      <input type="text" name="adresse_ouvrage" class="form-control @error('adresse_ouvrage') is-invalid @enderror" value="{{ old('adresse_ouvrage') }}" placeholder="Adresse">
+                      <input type="text" name="adresse_ouvrage" class="form-control @error('adresse_ouvrage') is-invalid @enderror" value="{{ old('adresse_ouvrage') ?? $projet->maitre_ouvrage->adresse }}" placeholder="Adresse">
                       @error('adresse_ouvrage')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
                   <div class="row">
                       <div class="col-sm-3 mb-3">
-                        <input type="text" name="cp_ouvrage" class="form-control @error('cp_ouvrage') is-invalid @enderror" value="{{ old('cp_ouvrage') }}" placeholder="Code Postal">
+                        <input type="text" name="cp_ouvrage" class="form-control @error('cp_ouvrage') is-invalid @enderror" value="{{ old('cp_ouvrage') ?? $projet->maitre_ouvrage->cp }}" placeholder="Code Postal">
                         @error('cp_ouvrage')
                           <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                       </div>
                       <div class="col-sm-9 mb-3">
-                        <input type="text" name="town_ouvrage" class="form-control @error('town_ouvrage') is-invalid @enderror" value="{{ old('town_ouvrage') }}" placeholder="Ville">
+                        <input type="text" name="town_ouvrage" class="form-control @error('town_ouvrage') is-invalid @enderror" value="{{ old('town_ouvrage') ?? $projet->maitre_ouvrage->ville }}" placeholder="Ville">
                         @error('town_ouvrage')
                           <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -51,10 +52,10 @@
                     <label for="phone">Personne à contacter en cas de manque d'information:</label>
                     <div class="row">
                       <div class="col-sm-6 mb-3">
-                        <input type="text" name="nom_contact" class="form-control" value="{{ old('nom_contact') }}" placeholder="Nom">
+                        <input type="text" name="contact_name" class="form-control" value="{{ old('contact_name') ?? $projet->maitre_ouvrage->contact_name }}" placeholder="Nom">
                       </div>
                       <div class="col-sm-6 mb-3">
-                          <input type="text" name="phone_contact" class="form-control" value="{{ old('phone_contact') }}" placeholder="Téléphone">
+                          <input type="text" name="contact_phone" class="form-control" value="{{ old('contact_phone') ?? $projet->maitre_ouvrage->contact_phone}}" placeholder="Téléphone">
                       </div>
                     </div>
                   </div>

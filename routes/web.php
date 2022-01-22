@@ -26,10 +26,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/prospect-create', 'ProspectController@create')->name('prospect-create');
 
 // Administrateur
-Route::group(['middleware' => ['auth', 'admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
   Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
   Route::get('/administratif', 'DashboardController@administratif')->name('administratif');
   Route::get('/enveloppe', 'DashboardController@enveloppe')->name('enveloppe');
+  Route::get('/nouveau-projet', 'DashboardController@pricing')->name('pricing');
   //Projet
   Route::post('/administratif-create', 'ProjetController@createAdministratif')->name('administratif.create');
+  Route::post('/projet-create', 'ProjetController@create')->name('projet.create');
+  Route::get('/projets-list', 'ProjetController@index')->name('projets-list');
+  Route::post('/projet-show', 'ProjetController@show')->name('projet.show');
+
 });
