@@ -25,10 +25,14 @@ class CreateProjetsTable extends Migration
             $table->string('number')->nullable();
             $table->string('name');
             $table->string('pack');
+            $table->boolean('different_ouvrage')->nullable();
             $table->string('adresse')->nullable();
+            $table->string('cp')->nullable();
+            $table->string('ville')->nullable();
             $table->string('ref_cadastrales')->nullable();
             $table->string('date_pc')->nullable();
             $table->string('emplacement')->nullable();
+            $table->boolean('administratif_complete')->nullable();
         });
     }
 

@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::post('/administratif-create', 'ProjetController@createAdministratif')->name('administratif.create');
   Route::post('/projet-create', 'ProjetController@create')->name('projet.create');
   Route::get('/projets-list', 'ProjetController@index')->name('projets-list');
-  Route::post('/projet-show', 'ProjetController@show')->name('projet.show');
+  Route::get('/projet-show/{id}', 'ProjetController@show')->name('projet.show');
+  Route::post('/projet-delete/{id}', 'ProjetController@delete')->name('projet.delete');
 
 });

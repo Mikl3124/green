@@ -19,11 +19,26 @@ class ProjetController extends Controller
     return view('dashboard.projets_list', compact('projets'));
   }
 
-  public function show(Request $request)
+  public function show($id)
   {
-    $projet = Projet::find($request->projet_id);
+    $projet = Projet::find($id);
     session(['projet' => $projet->id]);
     return view('dashboard.administratif', compact('projet'));
+  }
+
+  public function delete($id)
+  {
+
+    $projets = Projet::where('user_id', Auth::user()->id)->get();
+    $projet = Projet::find($id);
+    $maitre_ouvrage = MaitreOuvrage::find($projet->maitre_ouvrage_id);
+    $maitre_oeuvre = MaitreOeuvre::find($projet->maitre_oeuvre_id);
+    $projet->delete();
+    $maitre_ouvrage->delete();
+    $maitre_oeuvre->delete();
+    
+    Flashy::success('Le projet a été supprimé avec succès');
+    return Redirect::back();
   }
 
   public function create(Request $request)
@@ -49,6 +64,7 @@ class ProjetController extends Controller
 
   public function createAdministratif(Request $request)
   {
+
 
     $validator = Validator::make($request->all(), [
       'lastname_ouvrage' => 'required',
@@ -79,7 +95,7 @@ class ProjetController extends Controller
   ]);
 
   if ($validator->fails()) {
-    return back()->withErrors($validator)->withInput();
+    return Redirect::back()->withErrors($validator)->withInput();
   }
 
     $projet = Projet::find($request->projet_id);
@@ -108,10 +124,15 @@ class ProjetController extends Controller
     $projet->maitre_ouvrage_id = $maitre_ouvrage->id;
     $projet->ref_cadastrales = $request->ref_cadastrales;
     $projet->adresse = $request->adresse_construction;
+    $projet->cp = $request->cp_construction;
+    $projet->ville = $request->town_construction;
     $projet->date_pc = $request->date_pc;
+    $projet->different_ouvrage = $request->different_ouvrage;
     $projet->emplacement = $request->emplacement;
     $projet->user_id = Auth::user()->id;
+    $projet->administratif_complete = 1;
     $projet->save();
+
 
     return view('dashboard.enveloppe');
   }

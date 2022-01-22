@@ -19,8 +19,8 @@ class DashboardController extends Controller
   {
     if (session()->has('projet')) {
       $projet = Projet::find(Session::get('projet'));
-      return view('dashboard.administratif', compact('projet'));
-    }
+        return view('dashboard.administratif', compact('projet'));
+      }
     Flashy::error('Une erreur est survenue');
     return Redirect::back();
   }

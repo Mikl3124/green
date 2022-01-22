@@ -7,11 +7,17 @@
     </div>
 
     @foreach ($projets as $projet)
-      <form action="{{ route('projet.show') }}" method="post">
-        @csrf
-        <input type="hidden" name="projet_id" value="{{ $projet->id }}">
-        <button class="btn btn-primary mb-2" type="submit">{{ $projet->name }} {{ $projet->maitre_oeuvre->firstname }}</button>
-      </form>
+    <ul>   
+        <div class="d-flex">
+        <a class="btn btn-primary mb-2 mx-1" href="{{ route('projet.show',$projet->id) }}">{{ $projet->name }}</a>
+            <form method="POST" action="{{ route('projet.delete',$projet->id) }}">
+                @csrf
+                <button class="btn btn-danger mb-2 mx-1" type="submit">Effacer le projet</button> 
+            </form>
+        </div>
+
+    </ul>
+      
     @endforeach
 
 @endsection
