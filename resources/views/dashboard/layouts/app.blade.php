@@ -21,8 +21,10 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
   <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
   <!-- Vendor CSS Files -->
@@ -35,12 +37,6 @@
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: eNno - v4.7.0
-  * Template URL: https://bootstrapmade.com/enno-free-simple-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -56,6 +52,22 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('dashboard') ? 'active' : ''}}" href="{{ route('dashboard') }}"><i class="fas fa-home"></i> Accueil</a>
                 </li>
+              <div class="card-menu">
+                <div>
+                    <p class="mb-0"><u>Votre projet:</u></p>
+                    <p>{{ $projet->name }}
+                        <span>
+                            <small>
+                                <a href="#ModalChangeNameProjet" data-toggle="modal" data-target="#ModalChangeNameProjet"><i class="fas fa-edit"></i></a>
+                            </small>
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    <p class="mb-0"><u>Votre pack:</u></p>
+                    <p>{{ $projet->pack->name }} <span><small><a href="{{ route('projet.choice_pack', $projet->id) }}"><i class="fas fa-edit"></i></a></small></span></p>
+                </div>
+            </div>
                 <li class="nav-item">
                   <a class="nav-link {{ request()->is('administratif') ? 'active' : ''}}" href="{{ route('administratif') }}"><i class="far fa-id-card"></i> Données administratives</a>
                 </li>
@@ -87,17 +99,41 @@
 
 </div>
 
-<script>
+<!-- Modal -->
+<div class="modal fade ModalChangeNameProjet" tabindex="-1" role="dialog" aria-labelledby="ModalChangeNameProjet" aria-hidden="true" id="ModalChangeNameProjet">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modifier le nom du projet</h5>
+      </div>
+      <form action="{{ route('projet.create')}}" method="post">
+          <input type="hidden" name="pack" value="3">
+          @csrf
+          <div class="modal-body">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">Nom du projet:</span>
+              <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">Ignorer</button>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
 
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-            if($( "#wrapper" ).hasClass( "toggled" )){
-                $("#menu-toggle").html('<i class="fas fa-arrow-right text-white"></i>')
-            }else{
-                $("#menu-toggle").html('<i class="fas fa-arrow-left text-white"></i>')
-            }
-        });
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        if($( "#wrapper" ).hasClass( "toggled" )){
+            $("#menu-toggle").html('<i class="fas fa-arrow-right text-white"></i>')
+        }else{
+            $("#menu-toggle").html('<i class="fas fa-arrow-left text-white"></i>')
+        }
+    });
 
     </script>
     <!-- /#wrapper -->

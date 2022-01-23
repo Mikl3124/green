@@ -1687,3 +1687,11 @@ body{background-color:#eee;}
   border-color: #999999 !important;
 }
 
+.card-menu{
+  background-color: #111;
+  padding: 10px;
+  margin: 10px;
+  border: solid #20B360 1px;
+  border-radius: 6px;
+  color: #999999;
+}

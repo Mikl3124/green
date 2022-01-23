@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pack;
 use App\Models\Projet;
 use App\Models\MaitreOeuvre;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ class ProjetController extends Controller
 {
   public function index()
   {
+    session()->forget('projet');
     $projets = Projet::where('user_id', Auth::user()->id)->get();
     return view('dashboard.projets_list', compact('projets'));
   }
@@ -52,7 +54,7 @@ class ProjetController extends Controller
       $maitre_oeuvre->type = "Constructeur";
       $maitre_oeuvre->save();
       $projet->maitre_oeuvre_id = $maitre_oeuvre->id;
-      $projet->pack = $request->pack;
+      $projet->pack_id = $request->pack;
       $projet->name = $request->projet_name;
       $projet->user_id = Auth::user()->id;
       $projet->save();
@@ -146,6 +148,26 @@ class ProjetController extends Controller
     $projet->save();
 
 
-    return view('dashboard.enveloppe');
+    return view('dashboard.enveloppe', compact('projet'));
+  }
+
+  public function choice_pack($id)
+  {
+    $projet = Projet::find($id);
+    $pack1 = Pack::find(1);
+    $pack2 = Pack::find(2);
+    $pack3 = Pack::find(3);
+    return view('dashboard.change-pack', compact('pack1', 'pack2', 'pack3', 'projet'));
+  }
+
+  public function change_pack(Request $request)
+  {
+    $projet = Projet::find($request->projet_id);
+    $pack = Pack::find($request->pack_id);
+
+    $projet->pack_id = $pack->id;
+    $projet->save();
+
+    return redirect()->route('projet.show', $projet->id);
   }
 }

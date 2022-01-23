@@ -30,12 +30,14 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
   Route::get('/administratif', 'DashboardController@administratif')->name('administratif');
   Route::get('/enveloppe', 'DashboardController@enveloppe')->name('enveloppe');
-  Route::get('/nouveau-projet', 'DashboardController@pricing')->name('pricing');
+  Route::get('/pricing', 'DashboardController@pricing')->name('pricing');
   //Projet
   Route::post('/administratif-create', 'ProjetController@createAdministratif')->name('administratif.create');
   Route::post('/projet-create', 'ProjetController@create')->name('projet.create');
   Route::get('/projets-list', 'ProjetController@index')->name('projets-list');
   Route::get('/projet-show/{id}', 'ProjetController@show')->name('projet.show');
+  Route::get('/change-pack/{id}', 'ProjetController@choice_pack')->name('projet.choice_pack');
+  Route::post('/change-pack/', 'ProjetController@change_pack')->name('projet.change_pack');
   Route::post('/projet-delete/{id}', 'ProjetController@delete')->name('projet.delete');
 
 });

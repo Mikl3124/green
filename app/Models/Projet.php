@@ -23,4 +23,9 @@ class Projet extends Model
       return $this->belongsTo(MaitreOuvrage::class);
     }
 
+  public function pack()
+  {
+    return $this->belongsTo(Pack::class);
+  }
+
 }

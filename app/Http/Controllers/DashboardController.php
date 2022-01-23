@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pack;
 use App\Models\Projet;
 use Illuminate\Http\Request;
 use MercurySeries\Flashy\Flashy;
@@ -37,7 +38,10 @@ class DashboardController extends Controller
 
   public function pricing()
   {
-    return view('dashboard.pricing');
+    $pack1 = Pack::find(1);
+    $pack2 = Pack::find(2);
+    $pack3 = Pack::find(3);
+    return view('dashboard.pricing', compact('pack1', 'pack2', 'pack3'));
   }
 
 }

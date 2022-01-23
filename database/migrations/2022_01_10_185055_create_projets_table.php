@@ -20,11 +20,12 @@ class CreateProjetsTable extends Migration
             $table->foreign('maitre_ouvrage_id')->references('id')->on('maitre_ouvrages');
             $table->unsignedBigInteger('maitre_oeuvre_id')->nullable();
             $table->foreign('maitre_oeuvre_id')->references('id')->on('maitre_oeuvres');
+            $table->unsignedBigInteger('pack_id')->nullable();
+            $table->foreign('pack_id')->references('id')->on('packs');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('number')->nullable();
             $table->string('name');
-            $table->string('pack');
             $table->boolean('different_ouvrage')->nullable();
             $table->string('adresse')->nullable();
             $table->string('cp')->nullable();
