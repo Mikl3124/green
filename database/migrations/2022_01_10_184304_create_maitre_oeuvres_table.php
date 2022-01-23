@@ -16,11 +16,11 @@ class CreateMaitreOeuvresTable extends Migration
         Schema::create('maitre_oeuvres', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('adresse');
-            $table->string('cp');
-            $table->string('ville');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('adresse')->nullable();;
+            $table->string('cp')->nullable();;
+            $table->string('ville')->nullable();;
             $table->string('type');
         });
     }

@@ -29,14 +29,17 @@ class ProjetController extends Controller
   public function delete($id)
   {
 
-    $projets = Projet::where('user_id', Auth::user()->id)->get();
     $projet = Projet::find($id);
     $maitre_ouvrage = MaitreOuvrage::find($projet->maitre_ouvrage_id);
     $maitre_oeuvre = MaitreOeuvre::find($projet->maitre_oeuvre_id);
     $projet->delete();
-    $maitre_ouvrage->delete();
-    $maitre_oeuvre->delete();
-    
+    if ($maitre_ouvrage != null){
+      $maitre_ouvrage->delete();
+    }
+    if ($maitre_oeuvre != null){
+      $maitre_oeuvre->delete();
+    }
+
     Flashy::success('Le projet a été supprimé avec succès');
     return Redirect::back();
   }
@@ -45,6 +48,10 @@ class ProjetController extends Controller
   {
     if (Auth::check()){
       $projet = new Projet;
+      $maitre_oeuvre = new MaitreOeuvre;
+      $maitre_oeuvre->type = "Constructeur";
+      $maitre_oeuvre->save();
+      $projet->maitre_oeuvre_id = $maitre_oeuvre->id;
       $projet->pack = $request->pack;
       $projet->name = $request->projet_name;
       $projet->user_id = Auth::user()->id;
@@ -65,7 +72,6 @@ class ProjetController extends Controller
   public function createAdministratif(Request $request)
   {
 
-
     $validator = Validator::make($request->all(), [
       'lastname_ouvrage' => 'required',
       'firstname_ouvrage' => 'required',
@@ -75,6 +81,9 @@ class ProjetController extends Controller
       'adresse_construction' => 'required',
       'cp_construction' => 'required|integer',
       'town_construction' => 'required',
+      'adresse_oeuvre' => 'required',
+      'cp_oeuvre' => 'required',
+      'town_oeuvre' => 'required',
       'ref_cadastrales' => 'required',
       'date_pc'=> 'required'
 
@@ -90,12 +99,15 @@ class ProjetController extends Controller
       'cp_construction.required' => 'Le code postal est requis',
       'cp_construction.integer' => 'Le code postal doit être un nombre',
       'town_construction.required' => 'Le nom de la ville est requis',
+      'adresse_oeuvre.required' => "L'adresse est requise",
+      'cp_oeuvre.required' => 'Le code postal est requis',
+      'town_oeuvre.required' => 'Le nom de la ville est requis',
       'ref_cadastrales.required' => 'Les références cadastrales sont requises',
       'date_pc.required' => 'La date est requise'
   ]);
 
   if ($validator->fails()) {
-    return Redirect::back()->withErrors($validator)->withInput();
+    return redirect()->route('administratif')->withErrors($validator)->withInput();
   }
 
     $projet = Projet::find($request->projet_id);

@@ -57,7 +57,7 @@
                     <a class="nav-link {{ request()->is('dashboard') ? 'active' : ''}}" href="{{ route('dashboard') }}"><i class="fas fa-home"></i> Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('administratif') ? 'active' : ''}}" href="{{ route('administratif') }}"><i class="far fa-id-card"></i> Données administratives</a>
+                  <a class="nav-link {{ request()->is('administratif') ? 'active' : ''}}" href="{{ route('administratif') }}"><i class="far fa-id-card"></i> Données administratives</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link {{ request()->is('enveloppe') ? 'active' : ''}}" href="{{ route('enveloppe') }}"><i class="fas fa-cube"></i> Enveloppe</a>

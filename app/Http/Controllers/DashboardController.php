@@ -27,7 +27,12 @@ class DashboardController extends Controller
 
   public function enveloppe()
   {
-    return view('dashboard.enveloppe');
+    if (session()->has('projet')) {
+      $projet = Projet::find(Session::get('projet'));
+        return view('dashboard.enveloppe', compact('projet'));
+      }
+      Flashy::error('Une erreur est survenue');
+      return Redirect::back();
   }
 
   public function pricing()

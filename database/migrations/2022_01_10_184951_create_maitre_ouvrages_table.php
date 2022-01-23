@@ -21,8 +21,8 @@ class CreateMaitreOuvragesTable extends Migration
             $table->string('adresse');
             $table->string('cp');
             $table->string('ville');
-            $table->string('contact_name');
-            $table->string('contact_phone');
+            $table->string('contact_name')->nullable();
+            $table->string('contact_phone')->nullable();;
         });
     }
 
