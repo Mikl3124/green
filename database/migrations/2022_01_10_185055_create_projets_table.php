@@ -25,6 +25,8 @@ class CreateProjetsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('number')->nullable();
+            $table->foreign('surface_id')->references('id')->on('surfaces');
+            $table->unsignedBigInteger('surface_id')->nullable();
             $table->string('name');
             $table->boolean('different_ouvrage')->nullable();
             $table->string('adresse')->nullable();
@@ -33,7 +35,10 @@ class CreateProjetsTable extends Migration
             $table->string('ref_cadastrales')->nullable();
             $table->string('date_pc')->nullable();
             $table->string('emplacement')->nullable();
-            $table->boolean('administratif_complete')->nullable();
+            $table->string('type')->nullable();
+            $table->integer('progress')->nullable();
+            $table->boolean('administratif_complete')->default(0);
+            $table->boolean('surface_complete')->default(0);
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pack;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,6 +24,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+    $pack1 = Pack::find(1);
+    $pack2 = Pack::find(2);
+    $pack3 = Pack::find(3);
+
+        return view('home', compact('pack1', 'pack2', 'pack3'));
     }
-}
+
+    public function home()
+    {
+
+    $pack1 = Pack::find(1);
+    $pack2 = Pack::find(2);
+    $pack3 = Pack::find(3);
+
+        return view('welcome', compact('pack1', 'pack2', 'pack3'));
+    }
+  }

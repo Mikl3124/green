@@ -11,6 +11,7 @@ use MercurySeries\Flashy\Flashy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ProjetController extends Controller
 {
@@ -24,15 +25,22 @@ class ProjetController extends Controller
   public function show($id)
   {
     $projet = Projet::find($id);
-    session(['projet' => $projet->id]);
-    return view('dashboard.administratif', compact('projet'));
+    if ($projet->user_id == Auth::user()->id){
+      session(['projet' => $projet->id]);
+      return view('dashboard.administratif', compact('projet'));
+    }
+
+    Flashy::error('Une erreur est survenue');
+    return Redirect::back();
+
   }
 
   public function delete($id)
   {
 
     $projet = Projet::find($id);
-    $maitre_ouvrage = MaitreOuvrage::find($projet->maitre_ouvrage_id);
+    if ($projet->user_id == Auth::user()->id){
+      $maitre_ouvrage = MaitreOuvrage::find($projet->maitre_ouvrage_id);
     $maitre_oeuvre = MaitreOeuvre::find($projet->maitre_oeuvre_id);
     $projet->delete();
     if ($maitre_ouvrage != null){
@@ -41,13 +49,25 @@ class ProjetController extends Controller
     if ($maitre_oeuvre != null){
       $maitre_oeuvre->delete();
     }
-
     Flashy::success('Le projet a été supprimé avec succès');
     return Redirect::back();
+    }
+
+    Flashy::error('Une erreur est survenue');
+    return Redirect::back();
+
   }
 
   public function create(Request $request)
   {
+    $validator = Validator::make($request->all(), [
+      'projet_name' => 'required' ]
+      );
+    if ($validator->fails()) {
+      Flashy::error('Le nom du projet est obligatoire');
+      return redirect()->back();
+    }
+
     if (Auth::check()){
       $projet = new Projet;
       $maitre_oeuvre = new MaitreOeuvre;
@@ -55,6 +75,12 @@ class ProjetController extends Controller
       $maitre_oeuvre->save();
       $projet->maitre_oeuvre_id = $maitre_oeuvre->id;
       $projet->pack_id = $request->pack;
+      if($projet->progress > 10){
+        $projet->progress = $projet->progress;
+      }else {
+        $projet->progress += 10;
+      }
+
       $projet->name = $request->projet_name;
       $projet->user_id = Auth::user()->id;
       $projet->save();
@@ -63,7 +89,7 @@ class ProjetController extends Controller
       Flashy::success('Votre projet a bien été créé');
       session(['projet' => $projet->id]);
 
-      return view('dashboard.administratif', compact('projet'));
+      return redirect()->route('administratif', compact('projet'));
 
     }
     Flashy::error('Vous devez être connecté pour créer un projet');
@@ -113,7 +139,9 @@ class ProjetController extends Controller
   }
 
     $projet = Projet::find($request->projet_id);
-    session(['projet' => $projet->id]);
+
+    if ($projet->user_id == Auth::user()->id){
+      session(['projet' => $projet->id]);
     $maitre_oeuvre = new MaitreOeuvre;
     $maitre_ouvrage = new MaitreOuvrage;
 
@@ -143,17 +171,28 @@ class ProjetController extends Controller
     $projet->date_pc = $request->date_pc;
     $projet->different_ouvrage = $request->different_ouvrage;
     $projet->emplacement = $request->emplacement;
+    if($projet->progress > 20){
+      $projet->progress = $projet->progress;
+    }else {
+      $projet->progress += 10;
+    }
     $projet->user_id = Auth::user()->id;
     $projet->administratif_complete = 1;
     $projet->save();
 
-
+    Flashy::success('Les informations ont bien été enregistrées');
     return view('dashboard.enveloppe', compact('projet'));
+    }
+
+    Flashy::error('Une erreur est survenue');
+    return Redirect::back();
+
   }
 
   public function choice_pack($id)
   {
     $projet = Projet::find($id);
+
     $pack1 = Pack::find(1);
     $pack2 = Pack::find(2);
     $pack3 = Pack::find(3);
@@ -163,11 +202,32 @@ class ProjetController extends Controller
   public function change_pack(Request $request)
   {
     $projet = Projet::find($request->projet_id);
-    $pack = Pack::find($request->pack_id);
+    if ($projet->user_id == Auth::user()->id){
+      $pack = Pack::find($request->pack_id);
+      $projet->pack_id = $pack->id;
+      $projet->save();
 
-    $projet->pack_id = $pack->id;
-    $projet->save();
+      Flashy::success('Le pack a bien été modifié');
+      return redirect()->route('projet.show', $projet->id);
+    }
+    Flashy::error('Une erreur est survenue');
+    return Redirect::back();
 
-    return redirect()->route('projet.show', $projet->id);
   }
+
+  public function rename(Request $request)
+  {
+    $projet = Projet::find($request->projet_id);
+
+    if ($projet->user_id == Auth::user()->id){
+      $projet->name = $request->projet_name;
+      $projet->save();
+
+      Flashy::success('Le nom de votre projet a bien été modifié');
+      return redirect()->route('projet.show', $projet->id);
+    }
+    Flashy::error('Une erreur est survenue');
+    return Redirect::back();
+  }
+
 }

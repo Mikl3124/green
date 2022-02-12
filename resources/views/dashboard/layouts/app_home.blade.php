@@ -44,7 +44,7 @@
         <div id="sidebar-wrapper" class="bg-dark">
             <ul class="sidebar-nav">
               <div class="text-center mt-2 mb-5">
-                <a href="http://" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter un projet</a>
+                <a href="{{route('pricing') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter un projet</a>
               </div>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('dashboard') ? 'active' : ''}}" href="{{ route('dashboard') }}"><i class="fas fa-home"></i> Accueil</a>
@@ -79,6 +79,8 @@
 
     </script>
     <!-- /#wrapper -->
+
+    @include('flashy::message')
 
 </body>
 

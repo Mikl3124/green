@@ -3,8 +3,10 @@
 @section('content')
 
     <div class="section-title-dashboard mb-3 bg-light py-3">
-        <h2>Données administratives create</h2>
+        <h2>Données administratives</h2>
         <p>{{$projet->name}} (Projet: {{ $projet->number }})</p>
+        @include('dashboard.layouts.progress')
+
     </div>
     <form action="{{ route('administratif.create')}}" method="POST">
       @csrf
@@ -14,7 +16,7 @@
             <div class="card">
                 <h5 class="card-header text-center">Adresse actuelle du maître d'ouvrage</h5>
                 <div class="card-body">
-                  <div class="row" novalidate>
+                  <div class="row">
                       <div class="col-sm mb-3">
                         <input type="text" name="lastname_ouvrage" class="form-control @error('lastname_ouvrage') is-invalid @enderror"
                                 value="{{ old('lastname_ouvrage', $projet->maitre_ouvrage->lastname ?? '') }}" placeholder="Nom">

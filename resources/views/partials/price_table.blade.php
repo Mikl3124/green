@@ -201,7 +201,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="pack1Label">Veuillez donner un nom à mon projet</h5>
+        <h5 class="modal-title" id="pack1Label">Veuillez donner un nom à votre projet</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="{{ route('projet.create')}}" method="post">
@@ -210,7 +210,7 @@
         <div class="modal-body">
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Nom du projet:</span>
-            <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -226,7 +226,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="pack2Label">Veuillez donner un nom à mon projet</h5>
+        <h5 class="modal-title" id="pack2Label">Veuillez donner un nom à votre projet</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="{{ route('projet.create')}}" method="post">
@@ -235,7 +235,7 @@
         <div class="modal-body">
           <div class="input-group mb-3">
             <span class="input-group-text" id="inputGroup-sizing-default">Nom du projet:</span>
-            <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
           </div>
         </div>
         <div class="modal-footer">
@@ -251,7 +251,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="pack3Label">Veuillez donner un nom à mon projet</h5>
+        <h5 class="modal-title" id="pack3Label">Veuillez donner un nom à votre projet</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -261,7 +261,7 @@
           <div class="modal-body">
             <div class="input-group mb-3">
               <span class="input-group-text" id="inputGroup-sizing-default">Nom du projet:</span>
-              <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
             </div>
           </div>
           <div class="modal-footer">

@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Pack;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PackSeeder extends Seeder
 {
@@ -12,22 +12,20 @@ class PackSeeder extends Seeder
      */
     public function run()
     {
-        Pack::create([
-            'id' => 1,
-            'name' => 'Pack Permis',
-            'price' => 159,
-        ]);
-
-        Pack::create([
-            'id' => 2,
-            'name' => 'Pack permis+',
-            'price' => 189,
-        ]);
-
-        Pack::create([
-            'id' => 3,
-            'name' => 'Pack fin de travaux',
-            'price' => 259,
-        ]);
-    }
+      DB::table('packs')->insert([
+        'id' => 1,
+        'name' => 'Pack Permis',
+        'price' => 159,
+    ]);
+      DB::table('packs')->insert([
+        'id' => 2,
+        'name' => 'Pack Permis +',
+        'price' => 189,
+    ]);
+      DB::table('packs')->insert([
+        'id' => 3,
+        'name' => 'Pack Fin de Travaux',
+        'price' => 259,
+    ]);
+  }
 }

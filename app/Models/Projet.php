@@ -28,4 +28,9 @@ class Projet extends Model
     return $this->belongsTo(Pack::class);
   }
 
+  public function surface()
+  {
+    return $this->belongsTo(MaitreOuvrage::class);
+  }
+
 }

@@ -21,7 +21,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
   <!-- Bootstrap -->
-  
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -72,28 +72,16 @@
                   <a class="nav-link {{ request()->is('administratif') ? 'active' : ''}}" href="{{ route('administratif') }}"><i class="far fa-id-card"></i> Données administratives</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link {{ request()->is('enveloppe') ? 'active' : ''}}" href="{{ route('enveloppe') }}"><i class="fas fa-cube"></i> Enveloppe</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a class="nav-link {{ request()->is('enveloppe') ? 'active' : ''}}" href="{{ route('enveloppe') }}"><i class="fas fa-cube"></i> Données techniques</a>
                 </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
           <a href="#menu-toggle" class="btn mb-3 bg-dark mt-2" id="menu-toggle"><i class="fas fa-arrow-left text-white"></i></a>
-        <!-- Page Content -->
+          <!-- Page Content -->
         <div class="container-fluid">
 
-            @yield('content')
+          @yield('content')
 
         </div>
 
@@ -106,13 +94,13 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Modifier le nom du projet</h5>
       </div>
-      <form action="{{ route('projet.create')}}" method="post">
-          <input type="hidden" name="pack" value="3">
+      <form action="{{ route('projet.rename')}}" method="post">
+          <input type="hidden" name="projet_id" value="{{ $projet->id }}">
           @csrf
           <div class="modal-body">
             <div class="input-group mb-3">
               <span class="input-group-text" id="inputGroup-sizing-default">Nom du projet:</span>
-              <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              <input type="text" class="form-control" name="projet_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
             </div>
           </div>
           <div class="modal-footer">

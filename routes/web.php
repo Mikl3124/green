@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'HomeController@home')->name('home');
 
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
@@ -39,5 +38,9 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/change-pack/{id}', 'ProjetController@choice_pack')->name('projet.choice_pack');
   Route::post('/change-pack/', 'ProjetController@change_pack')->name('projet.change_pack');
   Route::post('/projet-delete/{id}', 'ProjetController@delete')->name('projet.delete');
+  Route::post('/projet-rename', 'ProjetController@rename')->name('projet.rename');
 
+    //Surface
+    Route::get('/surface/{id}', 'SurfaceController@create')->name('surface.create');
+    Route::post('/surface-store', 'SurfaceController@store')->name('surface.store');
 });
